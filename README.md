@@ -349,6 +349,7 @@ Cloud Architecture
 Infrastructure as Code
 
 - Terraform
+- Infrastructure provisioning
 - Terraform state management
 - Resource dependencies
 - Infrastructure planning
@@ -389,6 +390,7 @@ Security
 Linux Administration
 
 - Ubuntu
+- SSH
 - Bash/Shell
 - Apache
 - Package management
