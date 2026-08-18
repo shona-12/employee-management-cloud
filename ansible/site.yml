@@ -30,7 +30,7 @@
     - name: Set database password
       lineinfile:
         path: /etc/environment
-        line: 'DB_PASSWORD="EmployeeDB2026Secure"'
+        line: 'DB_PASSWORD="PitCLtV8pvIoT6MPRBtgDPGhDoAbCZ4Q"'
         create: true
 
     - name: Set database host

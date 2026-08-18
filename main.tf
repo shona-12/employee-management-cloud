@@ -516,7 +516,7 @@ resource "aws_db_instance" "main" {
 
   db_name  = "employee_db"
   username = "admin"
-  password = "EmployeeDB2026Secure"
+  password = "PitCLtV8pvIoT6MPRBtgDPGhDoAbCZ4Q"
 
   db_subnet_group_name = aws_db_subnet_group.main.name
 
