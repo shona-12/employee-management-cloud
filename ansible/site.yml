@@ -1,38 +1,65 @@
 ---
-- name: Configure Employee Management Application Servers
+- name: Deploy Employee Management Application
   hosts: app
   become: true
 
   tasks:
-
-    - name: Update apt cache
+    - name: Install Apache and PHP
       apt:
-        update_cache: yes
-        cache_valid_time: 3600
-
-    - name: Install Apache
-      apt:
-        name: apache2
+        name:
+          - apache2
+          - php
+          - php-mysql
         state: present
+        update_cache: true
 
-    - name: Ensure Apache is running
+    - name: Start Apache
       service:
         name: apache2
         state: started
-        enabled: yes
+        enabled: true
 
-    - name: Create application homepage
-      shell: |
-        HOSTNAME=$(hostname)
-        cat > /var/www/html/index.html <<EOF
-        <html>
-        <head>
-          <title>Employee Management System</title>
-        </head>
-        <body>
-          <h1>Employee Management System</h1>
-          <p>Server: $HOSTNAME</p>
-          <p>Configured by Ansible.</p>
-        </body>
-        </html>
-        EOF
+    - name: Copy application files
+      copy:
+        src: app/
+        dest: /var/www/html/
+        owner: www-data
+        group: www-data
+        mode: "0644"
+
+    - name: Set database password
+      lineinfile:
+        path: /etc/environment
+        line: 'DB_PASSWORD="EmployeeDB2026Secure"'
+        create: true
+
+    - name: Set database host
+      lineinfile:
+        path: /etc/environment
+        line: 'DB_HOST="employee-management-db.cliumscw44qs.ap-south-1.rds.amazonaws.com"'
+        create: true
+
+    - name: Set database user
+      lineinfile:
+        path: /etc/environment
+        line: 'DB_USER="admin"'
+        create: true
+
+    - name: Set database name
+      lineinfile:
+        path: /etc/environment
+        line: 'DB_NAME="employee_db"'
+        create: true
+
+    - name: Remove test homepage
+      file:
+        path: /var/www/html/index.html
+        state: absent
+
+    - name: Run database setup
+      command: php /var/www/html/setup.php
+      register: db_setup
+
+    - name: Show database setup result
+      debug:
+        msg: "{{ db_setup.stdout }}"
