@@ -2,7 +2,7 @@ Employee Management Cloud
 
 Production-Style AWS Infrastructure • Terraform • Ansible • PHP • MySQL
 
-«A fully automated employee management application deployed on AWS using Infrastructure as Code and configuration management.»
+A fully automated employee management application deployed on AWS using Infrastructure as Code and configuration management.
 
 Built to demonstrate how modern DevOps practices can be used to provision infrastructure, configure servers, deploy applications, secure network communication, and connect application workloads to a managed database.
 
