@@ -741,6 +741,7 @@ td {
                         <th>Role</th>
                         <th>Status</th>
                         <th>Joined</th>
+                        <th>Actions</th>
                     </tr>
 
                 </thead>
@@ -792,6 +793,19 @@ td {
                         <td>
                             <?= date("M d, Y", strtotime($row['created_at'])) ?>
                         </td>
+
+                        <td>
+                           <a href="edit_employee.php?id=<?= (int)$row['id'] ?>"
+                           style="color:#2563eb;text-decoration:none;font-weight:600;">
+                           Edit
+    			</a>
+
+   			   <a href="delete_employee.php?id=<?= (int)$row['id'] ?>"
+       			   onclick="return confirm('Are you sure you want to delete this employee?')"
+       			   style="color:#dc2626;text-decoration:none;font-weight:600;margin-left:12px;">
+       			   Delete
+   			 </a>
+			</td>
 
                     </tr>
 
